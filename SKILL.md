@@ -36,12 +36,13 @@ For APIs, scene uniforms, overlay types and the reference shot list read
 
 ## Reproduce the reference film exactly
 
-Inputs: the original song `10月9日.mp3` (48 kHz, 320k) and `10月9日.srt`
-(a copy of the SRT is in `references/example_input.srt`; the mp3 must come from the user).
+Inputs: the song `10月9日.mp3` (48 kHz) and `10月9日.srt` (compressed copies are included:
+`references/example_input.mp3`, 128 kbps, and `references/example_input.srt` — the 128 kbps copy
+reproduces the same analysis numbers; the original is 320 kbps).
 
 ```bash
 SK=~/.claude/skills/srt-science-mv
-bash $SK/scripts/setup_project.sh ~/work/neutrino-mv /path/10月9日.mp3 /path/10月9日.srt
+bash $SK/scripts/setup_project.sh ~/work/neutrino-mv $SK/references/example_input.mp3 $SK/references/example_input.srt
 cd ~/work/neutrino-mv
 diff <(python3 -c "import json;d=json.load(open('web/media/timeline.json'));print(round(d['period'],4),round(d['phase'],3),[[round(a,2),round(b,2)] for a,b in d['breaths']],round(d['end'],2))") \
      <(python3 -c "import json;d=json.load(open('$SK/references/example_timeline.json'));print(round(d['period'],4),round(d['phase'],3),[[round(a,2),round(b,2)] for a,b in d['breaths']],round(d['end'],2))") \

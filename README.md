@@ -22,7 +22,7 @@
 
 > Click the link to play it inline on GitHub (854×480, 4.6 MB, H.264). GitHub Markdown renders relative links to `.mp4` files in the repo as an embedded video player, so the film ships with the repository — no external video hosting needed.
 
-> **Compressed for the web:** both the demo video and the gallery images below are compressed copies made for fast transmission and inline playback on GitHub. The video is a 480p H.264 web transcode (audio 48 kbps); the contact sheets are recompressed JPEGs. The pipeline itself delivers full-quality 1920×1080 24 fps masters (H.264 CRF 14, BT.709, AAC 320 kbps) — run the export command in "How to use this skill" to get the uncompressed-quality version.
+> **Compressed for the web:** the demo video, the gallery images and the reference song are all compressed copies made for fast transmission and inline playback on GitHub. The video is a 480p H.264 web transcode (audio 48 kbps), the contact sheets are recompressed JPEGs, and `references/example_input.mp3` is a 128 kbps MP3 of the song — its music analysis still reproduces the exact beat map. The pipeline itself delivers full-quality 1920×1080 24 fps masters (H.264 CRF 14, BT.709, AAC 320 kbps) — run the export command in "How to use this skill" to get the uncompressed-quality version.
 
 ## 🖼 Film gallery (storyboard contact sheets — compressed copies)
 
@@ -51,7 +51,7 @@
 | Path | What it is |
 |---|---|
 | `SKILL.md` | Skill entry: non-negotiable rules, reproduce steps, new-film workflow |
-| `references/` | pitfalls.md, architecture.md, example SRT, example timeline |
+| `references/` | pitfalls.md, architecture.md, example input — song `example_input.mp3` + lyrics `example_input.srt`, example timeline |
 | `scripts/` | setup_project.sh, qa.sh, stills_sheet.sh |
 | `template/` | Engine template (web/ + tools/ + mv/) — copy this for a new film |
 | `web/ tools/ mv/ docs/` | Working production files of the reference film *NEUTRINO* |
@@ -73,7 +73,7 @@ Then just ask your agent in plain language — *"根据这首歌做一部科普 
 ### 2. Reproduce the reference film *NEUTRINO*
 
 ```bash
-bash scripts/setup_project.sh ~/work/neutrino-mv /path/to/song.mp3 references/example_input.srt
+bash scripts/setup_project.sh ~/work/neutrino-mv references/example_input.mp3 references/example_input.srt
 cd ~/work/neutrino-mv
 node tools/export.mjs --shots | tail -3      # expect: SHOT CHECK OK
 node tools/export.mjs --stills 1,5.5,12      # quick single-frame checks

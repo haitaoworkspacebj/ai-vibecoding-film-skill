@@ -22,7 +22,7 @@
 
 > 在 GitHub 网页上点击上方链接即可内嵌播放（854×480，4.6 MB，H.264）。GitHub 的 Markdown 会把指向仓库内 `.mp4` 的相对链接渲染成播放器，所以视频直接随仓库提交即可，不需要额外的视频托管。
 
-> **均为压缩版：** 上方演示视频和下方画廊图片都经过压缩，目的是便于网络传输、在 GitHub 上快速加载与内嵌播放。视频是 480p H.264 网络转码版（音频 48 kbps），分镜联系表是二次压缩的 JPEG。流水线本身输出的是 1920×1080 24 fps 全质量母版（H.264 CRF 14、BT.709、AAC 320 kbps）——按「使用方法」里的导出命令即可得到全质量版本。
+> **均为压缩版：** 上方演示视频、下方画廊图片和参考歌曲都经过压缩，目的是便于网络传输、在 GitHub 上快速加载与内嵌播放。视频是 480p H.264 网络转码版（音频 48 kbps），分镜联系表是二次压缩的 JPEG，`references/example_input.mp3` 是歌曲的 128 kbps 压缩版——用它做音乐分析仍能得到完全一致的节拍数据。流水线本身输出的是 1920×1080 24 fps 全质量母版（H.264 CRF 14、BT.709、AAC 320 kbps）——按「使用方法」里的导出命令即可得到全质量版本。
 
 ## 🖼 分镜画廊（联系表 · 压缩版）
 
@@ -51,7 +51,7 @@
 | 路径 | 说明 |
 |---|---|
 | `SKILL.md` | skill 入口：非可协商规则、复现步骤、新片流程 |
-| `references/` | pitfalls.md、architecture.md、示例 SRT、示例 timeline |
+| `references/` | pitfalls.md、architecture.md、示例输入——歌曲 `example_input.mp3` + 歌词 `example_input.srt`、示例 timeline |
 | `scripts/` | setup_project.sh、qa.sh、stills_sheet.sh |
 | `template/` | 引擎模板（web/ + tools/ + mv/），做新片时整体复制 |
 | `web/ tools/ mv/ docs/` | 参考影片《NEUTRINO》的工程现场 |
@@ -73,7 +73,7 @@ cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv
 ### 2. 复现参考影片《NEUTRINO》
 
 ```bash
-bash scripts/setup_project.sh ~/work/neutrino-mv /path/to/song.mp3 references/example_input.srt
+bash scripts/setup_project.sh ~/work/neutrino-mv references/example_input.mp3 references/example_input.srt
 cd ~/work/neutrino-mv
 node tools/export.mjs --shots | tail -3      # 期望：SHOT CHECK OK
 node tools/export.mjs --stills 1,5.5,12      # 快速单帧检查
