@@ -4,6 +4,8 @@
 
 **ai-vibecoding-film-skill 是什么？** 一条把歌曲（mp3 + 歌词 SRT 字幕）变成科学准确、逐拍对齐的音乐电影的完整流水线，全部用代码完成：场景用 Three.js + 手写 GLSL 着色器实时编写，无头 Chrome 确定性逐帧渲染，ffmpeg 合成 1080p 成片。参考影片《NEUTRINO》（2:04）讲述[南极冰立方中微子天文台](https://zh.wikipedia.org/wiki/冰立方中微子天文台)如何在冰下"抓住幽灵粒子"，即由本 skill 端到端产出。
 
+> **快速开始：** `git clone https://github.com/haitaoworkspacebj/ai-vibecoding-film-skill.git && cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv` —— 然后直接对 agent 说「根据这首歌做一部科普 MV」。完整步骤见下方「安装 skill」。
+
 ## 关键数据
 
 | | |
@@ -18,11 +20,13 @@
 
 ## 🎬 视频 Demo
 
-**[▶ 观看《NEUTRINO》（480p）— 点击即可内嵌播放](out/NEUTRINO_480p.mp4)**
+[![《NEUTRINO》— 2:04 影片](https://img.youtube.com/vi/udoDeuotY6Y/hqdefault.jpg)](https://youtu.be/udoDeuotY6Y)
 
-> 在 GitHub 网页上点击上方链接即可内嵌播放（854×480，4.6 MB，H.264）。GitHub 的 Markdown 会把指向仓库内 `.mp4` 的相对链接渲染成播放器，所以视频直接随仓库提交即可，不需要额外的视频托管。
+**▶ YouTube 观看：<https://youtu.be/udoDeuotY6Y>**
 
-> **均为压缩版：** 上方演示视频、下方画廊图片和参考歌曲都经过压缩，目的是便于网络传输、在 GitHub 上快速加载与内嵌播放。视频是 480p H.264 网络转码版（音频 48 kbps），分镜联系表是二次压缩的 JPEG，`references/example_input.mp3` 是歌曲的 128 kbps 压缩版——用它做音乐分析仍能得到完全一致的节拍数据。流水线本身输出的是 1920×1080 24 fps 全质量母版（H.264 CRF 14、BT.709、AAC 320 kbps）——按「使用方法」里的导出命令即可得到全质量版本。
+> GitHub 的 Markdown 没有视频播放器——`<video>` 标签会被剥掉，指向仓库内 `.mp4` 的链接也只渲染成纯链接——所以 Demo 在 YouTube 播放。同一文件也随仓库提交：[out/NEUTRINO_480p.mp4](out/NEUTRINO_480p.mp4)（854×480，4.6 MB，H.264）。
+
+> **均为压缩版：** 仓库内的视频副本、画廊图片和参考歌曲都经过压缩，便于网络传输、在 GitHub 上快速加载。视频是 480p H.264 网络转码版（音频 48 kbps），分镜联系表是二次压缩的 JPEG，`references/example_input.mp3` 是歌曲的 128 kbps 压缩版——用它做音乐分析仍能得到完全一致的节拍数据。流水线本身输出的是 1920×1080 24 fps 全质量母版（H.264 CRF 14、BT.709、AAC 320 kbps）——按「使用方法」里的导出命令即可得到全质量版本。
 
 ## 🖼 分镜画廊（联系表 · 压缩版）
 
@@ -58,17 +62,25 @@
 | `docs/images/` | 压缩后的分镜联系表（上方画廊） |
 | `out/NEUTRINO_480p.mp4` | 成片（480p 便于在 GitHub 内直接播放） |
 
+## 📦 安装 skill
+
+仓库本身就是 skill——安装就是把它拷进你的 agent 的 skills 目录。
+
+**环境要求：** macOS + Google Chrome（ANGLE Metal）、Node ≥ 22、Python ≥ 3.11、ffmpeg ≥ 6。
+
+```bash
+git clone https://github.com/haitaoworkspacebj/ai-vibecoding-film-skill.git
+cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv   # Claude Code
+# ZCode / 其他 agent：拷进对应 agent 的 skills 目录即可
+```
+
+安装到此结束。验证是否生效：直接对 agent 说「根据这首歌做一部科普 MV」/ *"make a science music video from this song"*，它应当识别 `SKILL.md` 并跑起流水线。
+
 ## 使用方法
 
 ### 1. 作为 agent skill 使用（推荐）
 
-把整个仓库拷进你的 agent skills 目录，整条流水线即可用：
-
-```bash
-cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv
-```
-
-然后直接用自然语言下需求——「根据这首歌做一部科普 MV」即可。先读 `SKILL.md`：里面的非可协商规则是全片质量的保证（时间只来自 SRT + 音乐分析、渲染前必须 `SHOT CHECK OK`、禁止整屏过曝、画面数字必须核对）。
+安装完成后（见上文），直接用自然语言下需求——「根据这首歌做一部科普 MV」即可。先读 `SKILL.md`：里面的非可协商规则是全片质量的保证（时间只来自 SRT + 音乐分析、渲染前必须 `SHOT CHECK OK`、禁止整屏过曝、画面数字必须核对）。
 
 ### 2. 复现参考影片《NEUTRINO》
 

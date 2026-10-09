@@ -4,6 +4,8 @@
 
 **What is ai-vibecoding-film-skill?** It is an open pipeline that turns a song (mp3 + lyric SRT subtitles) into a science-accurate, beat-locked music film — entirely in code. Scenes are written as real-time Three.js + hand-written GLSL shaders, rendered deterministically frame-by-frame in headless Chrome, and mastered to 1080p with ffmpeg. The reference film *NEUTRINO* (2:04) — the story of how the [IceCube Neutrino Observatory](https://en.wikipedia.org/wiki/IceCube_Neutrino_Observatory) catches "ghost particles" in Antarctic ice — was produced end-to-end with this skill.
 
+> **Quick start:** `git clone https://github.com/haitaoworkspacebj/ai-vibecoding-film-skill.git && cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv` — then ask your agent *"make a science music video from this song"*. Full steps under **Install the skill** below.
+
 ## Key facts
 
 | | |
@@ -18,11 +20,13 @@
 
 ## 🎬 Video demo
 
-**[▶ Watch NEUTRINO (480p) — click to play inline](out/NEUTRINO_480p.mp4)**
+[![NEUTRINO — the 2:04 film](https://img.youtube.com/vi/udoDeuotY6Y/hqdefault.jpg)](https://youtu.be/udoDeuotY6Y)
 
-> Click the link to play it inline on GitHub (854×480, 4.6 MB, H.264). GitHub Markdown renders relative links to `.mp4` files in the repo as an embedded video player, so the film ships with the repository — no external video hosting needed.
+**▶ Watch on YouTube: <https://youtu.be/udoDeuotY6Y>**
 
-> **Compressed for the web:** the demo video, the gallery images and the reference song are all compressed copies made for fast transmission and inline playback on GitHub. The video is a 480p H.264 web transcode (audio 48 kbps), the contact sheets are recompressed JPEGs, and `references/example_input.mp3` is a 128 kbps MP3 of the song — its music analysis still reproduces the exact beat map. The pipeline itself delivers full-quality 1920×1080 24 fps masters (H.264 CRF 14, BT.709, AAC 320 kbps) — run the export command in "How to use this skill" to get the uncompressed-quality version.
+> GitHub's Markdown has no video player — `<video>` tags are stripped and links to `.mp4` files in the repo render as plain links — so the demo streams on YouTube. The same file ships in the repo as [out/NEUTRINO_480p.mp4](out/NEUTRINO_480p.mp4) (854×480, 4.6 MB, H.264).
+
+> **Compressed for the web:** the repo video copy, the gallery images and the reference song are all compressed copies made for fast transmission on GitHub. The video is a 480p H.264 web transcode (audio 48 kbps), the contact sheets are recompressed JPEGs, and `references/example_input.mp3` is a 128 kbps MP3 of the song — its music analysis still reproduces the exact beat map. The pipeline itself delivers full-quality 1920×1080 24 fps masters (H.264 CRF 14, BT.709, AAC 320 kbps) — run the export command in "How to use this skill" to get the uncompressed-quality version.
 
 ## 🖼 Film gallery (storyboard contact sheets — compressed copies)
 
@@ -58,17 +62,25 @@
 | `docs/images/` | Compressed storyboard contact sheets (gallery above) |
 | `out/NEUTRINO_480p.mp4` | The finished film (480p for inline playback on GitHub) |
 
+## 📦 Install the skill
+
+The repository **is** the skill — installing means copying it into your agent's skills directory.
+
+**Prerequisites:** macOS + Google Chrome (ANGLE Metal), Node ≥ 22, Python ≥ 3.11, ffmpeg ≥ 6.
+
+```bash
+git clone https://github.com/haitaoworkspacebj/ai-vibecoding-film-skill.git
+cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv   # Claude Code
+# ZCode / other agents: copy it into that agent's skills directory instead
+```
+
+That's the whole install. To verify it works, ask your agent in plain language — *"根据这首歌做一部科普 MV"*, *"make a science music video from this song"* — it should pick up `SKILL.md` and run the pipeline.
+
 ## How to use this skill
 
 ### 1. Use as an agent skill (recommended)
 
-Copy this repository into your agent's skills directory and the whole pipeline becomes available:
-
-```bash
-cp -R ai-vibecoding-film-skill ~/.claude/skills/srt-science-mv
-```
-
-Then just ask your agent in plain language — *"根据这首歌做一部科普 MV"*, *"make a science music video from this song"*. Read `SKILL.md` first: it carries the non-negotiable rules (timing comes only from SRT + music analysis, `SHOT CHECK OK` before every render, no white-outs, every on-screen number fact-checked).
+With the skill installed (above), just ask your agent in plain language — *"根据这首歌做一部科普 MV"*, *"make a science music video from this song"*. Read `SKILL.md` first: it carries the non-negotiable rules (timing comes only from SRT + music analysis, `SHOT CHECK OK` before every render, no white-outs, every on-screen number fact-checked).
 
 ### 2. Reproduce the reference film *NEUTRINO*
 
