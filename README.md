@@ -13,7 +13,7 @@
 | **Rendering** | Three.js 0.186 + 12 custom GLSL scenes (volumetric ray-marching for accretion disk, Earth's interior, cosmic web) |
 | **Export** | Headless Chrome deterministic frames, 5–6 motion-blur subframes per frame (180° shutter) → ffmpeg H.264 1080p24, BT.709 |
 | **Quality gate** | Structural `SHOT CHECK OK` (no gaps/overlaps in the shot timeline) + visual contact-sheet review after every act |
-| **Science accuracy** | Every on-screen number fact-checked (2 km depth, ~130 nm DOM spacing, 41° Cherenkov angle in ice, up-going track selection); neutrinos never "glow" — blue Cherenkov light only appears after the interaction, from the charged muon |
+| **Science accuracy** | Every on-screen number fact-checked (2 km depth, ~130 m DOM spacing, 41° Cherenkov angle in ice, up-going track selection); neutrinos never "glow" — blue Cherenkov light only appears after the interaction, from the charged muon |
 | **Stack** | Node ≥ 22, Python ≥ 3.11, ffmpeg ≥ 6, macOS + Chrome (ANGLE Metal) |
 
 ## 🎬 Video demo
@@ -22,7 +22,9 @@
 
 > Click the link to play it inline on GitHub (854×480, 4.6 MB, H.264). GitHub Markdown renders relative links to `.mp4` files in the repo as an embedded video player, so the film ships with the repository — no external video hosting needed.
 
-## 🖼 Film gallery (storyboard contact sheets)
+> **Compressed for the web:** both the demo video and the gallery images below are compressed copies made for fast transmission and inline playback on GitHub. The video is a 480p H.264 web transcode (audio 48 kbps); the contact sheets are recompressed JPEGs. The pipeline itself delivers full-quality 1920×1080 24 fps masters (H.264 CRF 14, BT.709, AAC 320 kbps) — run the export command in "How to use this skill" to get the uncompressed-quality version.
+
+## 🖼 Film gallery (storyboard contact sheets — compressed copies)
 
 **Act I — Origin & the ghost** (black hole launch → flight → X-ray Earth → the trail itself):
 <img src="docs/images/verse1_keyframes.jpg" alt="Act I storyboard contact sheet: supermassive black hole accretion disk, high-speed flight past the Moon, cutaway Earth with a neutrino track through the core, macro shot of the glowing trail" width="820">
