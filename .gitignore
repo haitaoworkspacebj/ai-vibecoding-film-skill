@@ -1,0 +1,26 @@
+# deps & envs
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# local tool state
+.claude/
+.v2c/
+.video_agent/
+
+# OS
+.DS_Store
+
+# derived audio analysis (regenerate with mv/timeline.py)
+analysis/
+
+# user-supplied media: symlink to the local song file
+web/media/song.mp3
+
+# outputs: keep only the small 480p deliverable for the README
+out/*
+!out/NEUTRINO_480p.mp4
+
+# local tool config
+.zcodeignore
